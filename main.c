@@ -2,112 +2,112 @@
 #include <stdlib.h>
 #include <math.h>
 
-struct born {
-  int day;
-  int month;
-  int year;
+struct nasc {
+  int dia;
+  int mes;
+  int ano;
 };
 
-struct person {
-  char name[30];
-  char sex;
-  int age;
-  float weight;
-  float neck;
-  float waist;
-  float height;
-  float hip;
-  float fat;
-  float fat_weight;
-  float lean_mass_weight;
+struct pessoa {
+  char nome[30];
+  char sexo;
+  int idade;
+  float peso;
+  float pescoco;
+  float cintura;
+  float altura;
+  float quadril;
+  float gordura;
+  float gordura_peso;
+  float massa_magra_peso;
 
-  struct born born_info;
+  struct nasc nasc_info;
 };
 
-float calculate_man_fat(struct person new_person) {
+float calcular_homem_gordura(struct pessoa paciente) {
   float result = 0;
 
-  result = 495/(1.0324 - 0.190077 * (log10(new_person.waist - new_person.neck)) + 0.15456 * (log10(new_person.height))) - 450;
+  result = 495/(1.0324 - 0.190077 * (log10(paciente.cintura - paciente.pescoco)) + 0.15456 * (log10(paciente.altura))) - 450;
   return result;
 }
 
-float calculate_woman_fat(struct person new_person) {
+float calcular_mulher_gordura(struct pessoa paciente) {
   float result = 0;
 
-  result = 495/(1.29579 - 0.35004 * (log10(new_person.waist + new_person.hip - new_person.neck)) + 0.22100 * (log10(new_person.height))) - 450;
+  result = 495/(1.29579 - 0.35004 * (log10(paciente.cintura + paciente.quadril - paciente.pescoco)) + 0.22100 * (log10(paciente.altura))) - 450;
   return result;
 }
 
-float calculate_fat_weight(struct person new_person) {
-  return (new_person.weight * new_person.fat / 100);
+float calcular_gordura_peso(struct pessoa paciente) {
+  return (paciente.peso * paciente.gordura / 100);
 }
 
-float calculate_lean_mass_weight(struct person new_person) {
-  return (new_person.weight - new_person.fat_weight);
+float calcular_massa_magra_peso(struct pessoa paciente) {
+  return (paciente.peso - paciente.gordura_peso);
 }
 
-void print_woman_recommendation(struct person new_person) {
-  int age = new_person.age;
-  float fat = new_person.fat;
+void print_mulher_recomendacao(struct pessoa paciente) {
+  int idade = paciente.idade;
+  float gordura = paciente.gordura;
 
-  if (age <= 19) {
-    if (fat <= 13) {
+  if (idade <= 19) {
+    if (gordura <= 13) {
       printf("Excelente");
-    } else if ((fat >= 13.5) && (fat <= 17.5)) {
+    } else if ((gordura > 13.0) && (gordura <= 17.5)) {
       printf("Bom");
-    } else if ((fat >= 18.0) && (fat <= 21.0)) {
+    } else if ((gordura > 17.5) && (gordura <= 21.0)) {
       printf("Médio");
-    } else if ((fat >= 22.5) && (fat <= 28.5)) {
+    } else if ((gordura > 21.0) && (gordura <= 28.5)) {
       printf("Fraco");
-    } else if (fat > 29.0) {
+    } else if (gordura > 28.5) {
       printf("Muito fraco");
     }
-  } else if ((age >= 20) && (age <= 29)) {
-    if (fat <= 15) {
+  } else if ((idade >= 20) && (idade <= 29)) {
+    if (gordura <= 15) {
       printf("Excelente");
-    } else if ((fat >= 15.5) && (fat <= 20.0)) {
+    } else if ((gordura > 15.0) && (gordura <= 20.0)) {
       printf("Bom");
-    } else if ((fat >= 23.0) && (fat <= 27.0)) {
+    } else if ((gordura > 20.0) && (gordura <= 27.0)) {
       printf("Médio");
-    } else if ((fat >= 27.5) && (fat <= 31.5)) {
+    } else if ((gordura > 27.0) && (gordura <= 31.5)) {
       printf("Fraco");
-    } else if (fat > 32.0) {
+    } else if (gordura > 31.5) {
       printf("Muito fraco");
     }
-  } else if ((age >= 30) && (age <= 39)) {
-    if (fat <= 17) {
+  } else if ((idade >= 30) && (idade <= 39)) {
+    if (gordura <= 17) {
       printf("Excelente");
-    } else if ((fat >= 17.5) && (fat <= 24.5)) {
+    } else if ((gordura > 17.0) && (gordura <= 24.5)) {
       printf("Bom");
-    } else if ((fat >= 24.0) && (fat <= 29.0)) {
+    } else if ((gordura > 24.5) && (gordura <= 29.0)) {
       printf("Médio");
-    } else if ((fat >= 29.5) && (fat <= 33.5)) {
+    } else if ((gordura > 29.0) && (gordura <= 33.5)) {
       printf("Fraco");
-    } else if (fat > 34.0) {
+    } else if (gordura > 33.5) {
       printf("Muito fraco");
     }
-  } else if ((age >= 40) && (age <= 49)) {
-    if (fat <= 19) {
+  } else if ((idade >= 40) && (idade <= 49)) {
+    if (gordura <= 19) {
       printf("Excelente");
-    } else if ((fat >= 21.0) && (fat <= 24.0)) {
+    } else if ((gordura > 19.9) && (gordura <= 24.0)) {
       printf("Bom");
-    } else if ((fat >= 27.0) && (fat <= 32.0)) {
+    } else if ((gordura > 24.0) && (gordura <= 32.0)) {
       printf("Médio");
-    } else if ((fat >= 32.5) && (fat <= 36.5)) {
+    } else if ((gordura > 32.0) && (gordura <= 36.5)) {
       printf("Fraco");
-    } else if (fat > 37.0) {
+    } else if (gordura > 36.5) {
       printf("Muito fraco");
     }
-  } else if (age >= 50) {
-    if (fat <= 21) {
+  } else if (idade >= 50) {
+    if (gordura <= 21) {
       printf("Excelente");
-    } else if ((fat >= 24.5) && (fat <= 28.0)) {
+    } else if ((gordura > 21.0) && (gordura <= 28.0)) {
       printf("Bom");
-    } else if ((fat >= 29.0) && (fat <= 34.0)) {
+    } else if ((gordura > 28.0) && (gordura <= 34.0)) {
       printf("Médio");
-    } else if ((fat >= 34.5) && (fat <= 38.5)) {
+    } else if ((gordura > 34.0) && (gordura <= 38.5)) {
       printf("Fraco");
-    } else if (fat > 39.0) {
+    } else if (gordura > 38.5) {
       printf("Muito fraco");
     }
   }
@@ -115,68 +115,68 @@ void print_woman_recommendation(struct person new_person) {
   printf("\n");
 }
 
-void print_man_recommendation(struct person new_person) {
-  int age = new_person.age;
-  float fat = new_person.fat;
+void print_homem_recomendacao(struct pessoa paciente) {
+  int idade = paciente.idade;
+  float gordura = paciente.gordura;
 
-  if (age <= 19) {
-    if (fat <= 8) {
+  if (idade <= 19) {
+    if (gordura <= 8) {
       printf("Excelente");
-    } else if ((fat >= 8.5) && (fat <= 10.5)) {
+    } else if ((gordura > 8.0) && (gordura <= 10.5)) {
       printf("Bom");
-    } else if ((fat >= 11.0) && (fat <= 13.5)) {
+    } else if ((gordura > 10.5) && (gordura <= 13.5)) {
       printf("Médio");
-    } else if ((fat >= 14.0) && (fat <= 18.5)) {
+    } else if ((gordura > 13.5) && (gordura <= 18.5)) {
       printf("Fraco");
-    } else if (fat > 19.0) {
+    } else if (gordura > 18.5) {
       printf("Muito fraco");
     }
-  } else if ((age >= 20) && (age <= 29)) {
-    if (fat <= 10) {
+  } else if ((idade >= 20) && (idade <= 29)) {
+    if (gordura <= 10) {
       printf("Excelente");
-    } else if ((fat >= 10.5) && (fat <= 12.0)) {
+    } else if ((gordura > 10.0) && (gordura <= 12.0)) {
       printf("Bom");
-    } else if ((fat >= 12.5) && (fat <= 15.0)) {
+    } else if ((gordura > 12.0) && (gordura <= 15.0)) {
       printf("Médio");
-    } else if ((fat >= 15.5) && (fat <= 19.5)) {
+    } else if ((gordura > 15.0) && (gordura <= 19.5)) {
       printf("Fraco");
-    } else if (fat > 20.0) {
+    } else if (gordura > 19.5) {
       printf("Muito fraco");
     }
-  } else if ((age >= 30) && (age <= 39)) {
-    if (fat <= 11) {
+  } else if ((idade >= 30) && (idade <= 39)) {
+    if (gordura <= 11) {
       printf("Excelente");
-    } else if ((fat >= 11.5) && (fat <= 12.5)) {
+    } else if ((gordura > 11.0) && (gordura <= 12.5)) {
       printf("Bom");
-    } else if ((fat >= 15.0) && (fat <= 18.0)) {
+    } else if ((gordura > 12.5) && (gordura <= 18.0)) {
       printf("Médio");
-    } else if ((fat >= 18.5) && (fat <= 22.5)) {
+    } else if ((gordura > 18.0) && (gordura <= 22.5)) {
       printf("Fraco");
-    } else if (fat > 23.0) {
+    } else if (gordura > 22.5) {
       printf("Muito fraco");
     }
-  } else if ((age >= 40) && (age <= 49)) {
-    if (fat <= 12) {
+  } else if ((idade >= 40) && (idade <= 49)) {
+    if (gordura <= 12) {
       printf("Excelente");
-    } else if ((fat >= 12.5) && (fat <= 15.0)) {
+    } else if ((gordura > 12.0) && (gordura <= 15.0)) {
       printf("Bom");
-    } else if ((fat >= 18.0) && (fat <= 22.0)) {
+    } else if ((gordura > 15.0) && (gordura <= 22.0)) {
       printf("Médio");
-    } else if ((fat >= 22.5) && (fat <= 26.5)) {
+    } else if ((gordura > 22.0) && (gordura <= 26.5)) {
       printf("Fraco");
-    } else if (fat > 27.0) {
+    } else if (gordura > 26.5) {
       printf("Muito fraco");
     }
-  } else if (age >= 50) {
-    if (fat <= 13) {
+  } else if (idade >= 50) {
+    if (gordura <= 13) {
       printf("Excelente");
-    } else if ((fat >= 15.5) && (fat <= 19.0)) {
+    } else if ((gordura > 13.0) && (gordura <= 19.0)) {
       printf("Bom");
-    } else if ((fat >= 20.0) && (fat <= 24.0)) {
+    } else if ((gordura > 19.0) && (gordura <= 24.0)) {
       printf("Médio");
-    } else if ((fat >= 25.5) && (fat <= 28.5)) {
+    } else if ((gordura > 24.0) && (gordura <= 28.5)) {
       printf("Fraco");
-    } else if (fat > 29.0) {
+    } else if (gordura > 28.5) {
       printf("Muito fraco");
     }
   }
@@ -184,38 +184,38 @@ void print_man_recommendation(struct person new_person) {
   printf("\n");
 }
 
-void print_report(struct person new_person) {
+void print_report(struct pessoa paciente) {
   printf("\n------------------------------------------\n");
   printf("RELATÓRIO\n");
   printf("\n------------------------------------------\n");
 
-  printf("Nome: %s", new_person.name);
-  printf("Idade: %d\n", new_person.age);
+  printf("Nome: %s", paciente.nome);
+  printf("Idade: %d\n", paciente.idade);
 
-  printf("Sexo: ");
-  if (new_person.sex == 'm') {
+  printf("sexoo: ");
+  if (paciente.sexo == 'm') {
     printf("Masculino\n");
   } else {
     printf("Feminino\n");
   }
 
-  printf("Peso: %.2fkg\n", new_person.weight);
-  printf("Altura: %.2fcm\n", new_person.height);
-  printf("Cintura: %.2fcm\n", new_person.waist);
-  printf("Pescoço: %.2fcm\n", new_person.neck);
+  printf("Peso: %.2fkg\n", paciente.peso);
+  printf("Altura: %.2fcm\n", paciente.altura);
+  printf("Cintura: %.2fcm\n", paciente.cintura);
+  printf("Pescoço: %.2fcm\n", paciente.pescoco);
 
-  if (new_person.sex == 'f')
-    printf("Quadril: %.2fcm\n", new_person.hip);
+  if (paciente.sexo == 'f')
+    printf("Quadril: %.2fcm\n", paciente.quadril);
 
-  printf("Porcentagem de Gordura: %.2f\n", new_person.fat);
-  printf("Peso gordo: %.2fkg\n", new_person.fat_weight);
-  printf("Peso magro: %.2fkg\n", new_person.lean_mass_weight);
+  printf("Porcentidadem de Gordura: %.2f\n", paciente.gordura);
+  printf("Peso gordo: %.2fkg\n", paciente.gordura_peso);
+  printf("Peso magro: %.2fkg\n", paciente.massa_magra_peso);
 
   printf("\nSituação nutricional: ");
-  if (new_person.sex == 'm') {
-    print_man_recommendation(new_person);
+  if (paciente.sexo == 'm') {
+    print_homem_recomendacao(paciente);
   } else {
-    print_woman_recommendation(new_person);
+    print_mulher_recomendacao(paciente);
   }
   printf("Referência: John Thiel, 1985\n");
 
@@ -224,77 +224,77 @@ void print_report(struct person new_person) {
 int main() {
   printf("Bem vindo ao programa de auxílio nutricional\n");
 
-  struct person new_person;
+  struct pessoa paciente;
   printf("\nQual seu nome? ");
-  fgets(new_person.name, 30, stdin);
+  fgets(paciente.nome, 30, stdin);
 
-  printf("\nOk, %sVamos coletar informações para calcular sua gordura corporal\n", new_person.name);
+  printf("\nOk, %sVamos coletar informações para calcular sua gordura corporal\n", paciente.nome);
 
   printf("\nInicialmente, qual sua data de nascimento? Entre com o dia: ");
-  scanf("%d", &new_person.born_info.day);
+  scanf("%d", &paciente.nasc_info.dia);
 
-  if ((new_person.born_info.day < 1) || (new_person.born_info.day > 31)) {
+  if ((paciente.nasc_info.dia < 1) || (paciente.nasc_info.dia > 31)) {
     printf("Você inseriu um dia invalido\n");
     exit(0);
   }
 
   printf("\nQual o seu mês de nascimento? ");
-  scanf("%d", &new_person.born_info.month);
+  scanf("%d", &paciente.nasc_info.mes);
 
-  if ((new_person.born_info.month < 1) || (new_person.born_info.month > 12)) {
+  if ((paciente.nasc_info.mes < 1) || (paciente.nasc_info.mes > 12)) {
     printf("Você inseriu um mês invalido\n");
     exit(0);
   }
 
   printf("\nQual o seu ano de nascimento? ");
-  scanf("%d", &new_person.born_info.year);
+  scanf("%d", &paciente.nasc_info.ano);
 
-  if ((new_person.born_info.year < 1900) || (new_person.born_info.year > 2017)) {
+  if ((paciente.nasc_info.ano < 1900) || (paciente.nasc_info.ano > 2017)) {
     printf("Você inseriu um ano invalido\n");
     exit(0);
   }
 
-  if (new_person.born_info.year == 2017) {
+  if (paciente.nasc_info.ano == 2017) {
     printf("Infelizmente, esse programa só calcula a gordura corporal para maiores de um ano");
   }
 
-  new_person.age = 2017 - new_person.born_info.year;
-  if ((new_person.born_info.month > 8) || ((new_person.born_info.month == 8) && (new_person.born_info.day == 31))) {
-    new_person.age--;
+  paciente.idade = 2017 - paciente.nasc_info.ano;
+  if ((paciente.nasc_info.mes > 8) || ((paciente.nasc_info.mes == 8) && (paciente.nasc_info.dia == 31))) {
+    paciente.idade--;
   }
 
-  printf("Sua idade é %d\n", new_person.age);
+  printf("Sua idade é %d\n", paciente.idade);
 
-  printf("Qual seu sexo? (m para masculino, f para feminino) ");
-  scanf(" %c", &new_person.sex);
+  printf("Qual seu sexoo? (m para masculino, f para feminino) ");
+  scanf(" %c", &paciente.sexo);
 
   printf("Qual seu peso? ");
-  scanf("%f", &new_person.weight);
+  scanf("%f", &paciente.peso);
 
   printf("Qual sua altura? ");
-  scanf("%f", &new_person.height);
+  scanf("%f", &paciente.altura);
 
   printf("Qual a medida do seu pescoço? ");
-  scanf("%f", &new_person.neck);
+  scanf("%f", &paciente.pescoco);
 
   printf("Qual a medida da sua cintura? ");
-  scanf("%f", &new_person.waist);
+  scanf("%f", &paciente.cintura);
 
-  if (new_person.sex == 'f') {
+  if (paciente.sexo == 'f') {
     printf("Qual a medida do seu quadril? ");
-    scanf("%f", &new_person.hip);
+    scanf("%f", &paciente.quadril);
   }
 
-  if (new_person.sex == 'm') {
-    new_person.fat = calculate_man_fat(new_person);
+  if (paciente.sexo == 'm') {
+    paciente.gordura = calcular_homem_gordura(paciente);
   } else {
-    new_person.fat = calculate_woman_fat(new_person);
+    paciente.gordura = calcular_mulher_gordura(paciente);
   }
 
-  new_person.fat_weight = calculate_fat_weight(new_person);
-  new_person.lean_mass_weight = calculate_lean_mass_weight(new_person);
+  paciente.gordura_peso = calcular_gordura_peso(paciente);
+  paciente.massa_magra_peso = calcular_massa_magra_peso(paciente);
 
-  print_report(new_person);
+  print_report(paciente);
 
   return 0;
 }
